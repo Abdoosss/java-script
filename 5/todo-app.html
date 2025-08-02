@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="main-content">
+            <div class="header">
+                <h1>To-Do</h1>
+            </div>
+
+            <div class="task-input-container">
+                <input type="text" id="taskInput" placeholder="Add a new task..." class="task-input">
+                <button class="add-task-btn" id="addTaskBtn">Add Task</button>
+            </div>
+
+            <ul class="task-list" id="taskList">
+                <li class="task-item" data-status="completed">
+                    <div class="task-content">
+                        <div class="task-title">Go for a Walk</div>
+                    </div>
+                    <div class="task-actions">
+                        <button class="remove-btn" onclick="removeTask(this)">×</button>
+                    </div>
+                </li>
+                
+                <li class="task-item" data-status="completed">
+                    <div class="task-content">
+                        <div class="task-title">Read a Book</div>
+                    </div>
+                    <div class="task-actions">
+                        <button class="remove-btn" onclick="removeTask(this)">×</button>
+                    </div>
+                </li>
+                
+                <li class="task-item" data-status="pending">
+                    <div class="task-content">
+                        <div class="task-title">Try a New Recipe</div>
+                    </div>
+                    <div class="task-actions">
+                        <button class="remove-btn" onclick="removeTask(this)">×</button>
+                    </div>
+                </li>
+                
+                <li class="task-item" data-status="pending">
+                    <div class="task-content">
+                        <div class="task-title">Practice Meditation or Mindfulness</div>
+                    </div>
+                    <div class="task-actions">
+                        <button class="remove-btn" onclick="removeTask(this)">×</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+       <script src="main.js"></script>
+
+</body>
+</html>
+
