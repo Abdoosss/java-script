@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <form class="form">
+        <p class="title">Register </p>
+        <p class="message">Signup now and get full access to our app. </p>
+        <div class="flex">
+            <label>
+                <input required="" placeholder="" type="text" class="input">
+                <span>Firstname</span>
+            </label>
+
+            <label>
+                <input required="" placeholder="" type="text" class="input">
+                <span>Lastname</span>
+            </label>
+        </div>
+
+        <label>
+            <input required="" placeholder="" type="email" class="input">
+            <span>Email</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="password" class="input">
+            <span>Password</span>
+        </label>
+        <label>
+            <input required="" placeholder="" type="password" class="input">
+            <span>Confirm password</span>
+        </label>
+        <button class="submit">Submit</button>
+        <p class="signin">Already have an acount ? <a href="login.html">Signin</a> </p>
+    </form>
+
+    
+    <script>
+        // نجيب اليوزر الحالي من localStorage
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+        if (currentUser) {
+            document.getElementById("welcomeMsg").textContent =
+                `Welcome, ${currentUser.firstName} ${currentUser.lastName}! Your registration was successful.`;
+        } else {
+            document.getElementById("welcomeMsg").textContent = "Welcome! Please register or login.";
+        }
+    </script>
+
+    <script>
+        // نمسك الفورم
+        const form = document.querySelector(".form");
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault(); // يمنع إعادة تحميل الصفحة
+
+            // نجيب القيم من الفورم
+            const firstName = form.querySelectorAll(".input")[0].value.trim();
+            const lastName = form.querySelectorAll(".input")[1].value.trim();
+            const email = form.querySelectorAll(".input")[2].value.trim();
+            const password = form.querySelectorAll(".input")[3].value;
+            const confirmPassword = form.querySelectorAll(".input")[4].value;
+
+            // نجيب users من localStorage
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+
+            // تأكد إن الباسورد = confirm password
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+                return;
+            }
+
+            // تحقق لو الإيميل موجود
+            const exists = users.some(user => user.email === email);
+
+            if (exists) {
+                alert("Email already exists. Please use another one.");
+                return;
+            }
+
+            // لو كل حاجة تمام → نضيف user جديد
+            const newUser = {
+                firstName,
+                lastName,
+                email,
+                password
+            };
+
+            users.push(newUser);
+
+            // نحفظ في localStorage
+            localStorage.setItem("users", JSON.stringify(users));
+
+            alert("Registration successful! You can now login.");
+            form.reset();
+
+            // ممكن كمان تعمله redirect لصفحة login:
+            // window.location.href = "login.html";
+        });
+    </script>
+
+
+</body>
+
+</html>
